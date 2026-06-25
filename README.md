@@ -82,12 +82,12 @@ Three progressively refined versions of the Actor-Critic algorithm, each launchi
 ## Concept Progression
 
 ```
-Bellman.py                         →  manual Bellman update (no learning loop)
+Bellman.py                       →  manual Bellman update (no learning loop)
 blackJack.py                     →  environment interface + single episode
 mc1.py                           →  tabular Q-learning over 500k episodes
 Policy_training.py               →  neural network policy, no value baseline
 actor_critic_gym.py              →  neural policy + value baseline (TD, online)
-actor_critic_gym_animation.py  →  batch rollout + entropy + gradient clip + animation
+actor_critic_gym_animation.py    →  batch rollout + entropy + gradient clip + animation
 ```
 
 ---
