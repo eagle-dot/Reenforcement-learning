@@ -31,6 +31,8 @@ A hand-coded Blackjack environment (no external libraries). Runs a single game u
 
 **Concepts:** Environment/agent interface, state representation, reward signals, episode termination
 
+NO training!!!!
+
 ---
 
 ### `mc1.py` — Monte Carlo Control: Blackjack
@@ -63,17 +65,19 @@ Adds a Critic network to estimate V(s) at every step. Uses single-step TD target
 
 ---
 
-### `actor_critic_gym_animation.py` / `_1.py` / `_2.py` — Actor-Critic Variants with Animation
-
-Three progressively refined versions of the Actor-Critic algorithm, each launching a visual window once CartPole is solved.
-
-| File | Update style | Extras |
-|------|-------------|--------|
-| `actor_critic_gym_animation_1.py` | Online (single-step TD) | Animation only |
-| `actor_critic_gym_animation.py` | Batch (full episode) | Entropy bonus |
-| `actor_critic_gym_animation_2.py` | Batch (full episode) | Entropy bonus + gradient clipping |
+### `actor_critic_gym_animation.py` — Actor-Critic with Animation
+Batch trajectory version of Actor-Critic. Collects a full episode rollout before updating, then launches a visual window once CartPole is solved.
 
 **Concepts:** Batch trajectory updates, entropy bonus, gradient clipping (`clip_grad_norm_`), Gymnasium `render_mode='human'`
+
+**Key differences from `actor_critic_gym.py`:**
+
+| Feature | `actor_critic_gym.py` | `actor_critic_gym_animation.py` |
+|---------|----------------------|--------------------------------|
+| Update style | Online (single-step TD) | Batch (full episode rollout) |
+| Entropy bonus | No | Yes — keeps exploration alive |
+| Gradient clipping | No | Yes — `clip_grad_norm_` max=1.0 |
+| Animation | No | Yes — opens visual window on solve |
 
 **Solve condition:** Episode reward ≥ 470 steps (out of 500 max)
 
@@ -85,7 +89,7 @@ Three progressively refined versions of the Actor-Critic algorithm, each launchi
 Bellman.py                       →  manual Bellman update (no learning loop)
 blackJack.py                     →  environment interface + single episode
 mc1.py                           →  tabular Q-learning over 500k episodes
-Policy_training.py               →  neural network policy, no value baseline
+Policy_training.py               →  neural network policy, no value baseline (REINFORCE)
 actor_critic_gym.py              →  neural policy + value baseline (TD, online)
 actor_critic_gym_animation.py    →  batch rollout + entropy + gradient clip + animation
 ```
