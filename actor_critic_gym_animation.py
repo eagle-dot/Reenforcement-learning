@@ -9,8 +9,11 @@ import gymnasium as gym
 """
 One network, two heads sharing nothing (no shared layers):
 
-Actor: state(4) → 128 → ReLU → 2 → Softmax — outputs a probability distribution over actions (left/right)
-Critic: state(4) → 128 → ReLU → 1 — outputs a single number estimating how good the current state is (the value V(s))
+Actor: state(4) → 128 → ReLU → 2 → Softmax 
+    — outputs a probability distribution over actions (left/right)
+Critic: state(4) → 128 → ReLU → 1 
+    — outputs a single number estimating how good the current state is (the value V(s))
+
 forward() runs both heads in one call and returns both.
 """
 
