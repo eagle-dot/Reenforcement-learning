@@ -6,8 +6,21 @@ A progression of RL concepts implemented from scratch, starting with tabular met
 
 ## Files
 
-### `test1.py` — Q-Learning: Single Bellman Update
+### `Bellman.py` — Q-Learning: Single Bellman Update
 The most basic building block of Q-learning. A hardcoded 3-state grid world demonstrates one complete Bellman update step by step.
+
+Step 1 — Compute the target (what the Q-value should be):
+    bellman_target = immediate_reward + (gamma * max_future_q)
+
+
+Step 2 — Nudge the Q-table toward that target (the actual update):
+
+    td_error    = bellman_target - old_q_value   # how wrong we were
+    new_q_value = old_q_value + (alpha * td_error)
+
+
+alpha controls how big a step we take. If alpha = 1, we replace the old value entirely
+
 
 **Concepts:** Q-table, Bellman equation, TD error, learning rate (α), discount factor (γ)
 
@@ -69,12 +82,12 @@ Three progressively refined versions of the Actor-Critic algorithm, each launchi
 ## Concept Progression
 
 ```
-test1.py                         →  manual Bellman update (no learning loop)
+Bellman.py                         →  manual Bellman update (no learning loop)
 blackJack.py                     →  environment interface + single episode
 mc1.py                           →  tabular Q-learning over 500k episodes
 Policy_training.py               →  neural network policy, no value baseline
 actor_critic_gym.py              →  neural policy + value baseline (TD, online)
-actor_critic_gym_animation_2.py  →  batch rollout + entropy + gradient clip + animation
+actor_critic_gym_animation.py  →  batch rollout + entropy + gradient clip + animation
 ```
 
 ---
