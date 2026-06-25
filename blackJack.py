@@ -47,6 +47,16 @@ class BlackjackEnv:
         
         return (player_sum, dealer_showing, usable_ace)
 
+ 
+    """
+    return (player_sum, dealer_showing, usable_ace), reward, true/false
+    The state is a 3-tuple: (player_sum, dealer_showing, usable_ace)
+    Each dimension is independent — any combination is a valid state. So you count every possible combination by multiplying.
+    total states = (# player_sum values) × (# dealer_showing values) × (# usable_ace values)
+             =        20             ×           10               ×         2
+             = 400
+             
+    """
     def step(self, action):
         """Executes one step in the environment based on the agent's action."""
         if action == 1:  # HIT
